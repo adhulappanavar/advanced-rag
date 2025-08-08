@@ -1,0 +1,13 @@
+pinecone-client
+sentence-transformers
+langchain
+langchain-pinecone
+langchain-community
+python-dotenv
+numpy
+langsmith
+langchain[openai]
+rank-bm25
+pymupdf
+pinecone
+cohere 
