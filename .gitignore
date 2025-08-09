@@ -230,7 +230,7 @@ $RECYCLE.BIN/
 
 # Project specific
 # data/  # Commented out to include data directory in git
-*.pdf
+# *.pdf  # Commented out to include PDF files in git
 .env.local
 .env.production
 .env.staging
