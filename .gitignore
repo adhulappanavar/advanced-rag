@@ -229,7 +229,7 @@ $RECYCLE.BIN/
 .nfs*
 
 # Project specific
-data/
+# data/  # Commented out to include data directory in git
 *.pdf
 .env.local
 .env.production
