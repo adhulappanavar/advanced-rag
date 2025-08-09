@@ -33,7 +33,7 @@ import uuid
 load_dotenv()
 
 # Verify environment variables are loaded
-required_vars = ['PINECONE_API_KEY', 'PINECONE_INDEX', 'PINECONE_URL', 'DEEPSEEK_API_KEY','COHERE_API_KEY']
+required_vars = ['PINECONE_API_KEY', 'PINECONE_INDEX', 'PINECONE_URL', 'OPENAI_API_KEY','COHERE_API_KEY']
 
 print("Environment Variables Status:")
 print("-" * 30)
@@ -456,50 +456,28 @@ else:
     print(f"\n⚠️  Stored {total_stored}/{len(all_documents)} chunks")
     print("Some chunks may have failed to store.")
 
-# Get DeepSeek API key
-deepseek_api_key = os.getenv("DEEPSEEK_API_KEY")
+# Get OpenAI API key
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
-if not deepseek_api_key:
-    raise ValueError("DEEPSEEK_API_KEY not found in environment variables or .env file")
+if not openai_api_key:
+    raise ValueError("OPENAI_API_KEY not found in environment variables or .env file")
 
-print("✅ DeepSeek API key loaded successfully")
+print("✅ OpenAI API key loaded successfully")
 
-# Try to import ChatDeepSeek from LangChain
-try:
-    from langchain_community.chat_models import ChatDeepSeek
+# Initialize OpenAI LLM
+from langchain_openai import ChatOpenAI
 
-    # Initialize DeepSeek LLM
-    llm = ChatDeepSeek(
-        model="deepseek-chat",
-        deepseek_api_key=deepseek_api_key,
-        temperature=0.1,
-        streaming=False
-    )
+llm = ChatOpenAI(
+    model="gpt-4o-mini",  # Using GPT-4o-mini for cost efficiency
+    openai_api_key=openai_api_key,
+    temperature=0.1,
+    streaming=False
+)
 
-    print("✅ DeepSeek LLM initialized using ChatDeepSeek")
-    print(f"🤖 Model: deepseek-chat")
-    print(f"🌡️ Temperature: 0.1")
-    print(f"📡 Streaming: False")
-
-except ImportError:
-    print("⚠️ ChatDeepSeek not available, trying custom OpenAI-compatible wrapper...")
-
-    # Fallback: Use OpenAI wrapper with DeepSeek endpoint
-    from langchain_openai import ChatOpenAI
-
-    llm = ChatOpenAI(
-        model="deepseek-chat",
-        openai_api_key=deepseek_api_key,
-        openai_api_base="https://api.deepseek.com/v1",
-        temperature=0.1,
-        streaming=False
-    )
-
-    print("✅ DeepSeek LLM initialized using OpenAI-compatible wrapper")
-    print(f"🤖 Model: deepseek-chat")
-    print(f"🌡️ Temperature: 0.1")
-    print(f"📡 Streaming: False")
-    print(f"🔗 API Base: https://api.deepseek.com/v1")
+print("✅ OpenAI LLM initialized successfully")
+print(f"🤖 Model: gpt-4o-mini")
+print(f"🌡️ Temperature: 0.1")
+print(f"📡 Streaming: False")
 
 # Test the LLM with a simple query
 try:

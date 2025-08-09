@@ -19,7 +19,7 @@ A comprehensive implementation of advanced Retrieval-Augmented Generation (RAG) 
 
 ### Required API Keys
 - **Pinecone**: Vector database for embeddings
-- **DeepSeek**: LLM for answer generation
+- **OpenAI**: LLM for answer generation
 - **Cohere**: Re-ranking service
 
 ### Data Requirements
@@ -65,8 +65,8 @@ PINECONE_API_KEY=your_pinecone_api_key_here
 PINECONE_INDEX=your_pinecone_index_name_here
 PINECONE_URL=https://your-pinecone-url.pinecone.io
 
-# DeepSeek API Configuration  
-DEEPSEEK_API_KEY=your_deepseek_api_key_here
+# OpenAI API Configuration  
+OPENAI_API_KEY=your_openai_api_key_here
 
 # Cohere API Configuration (for re-ranking)
 COHERE_API_KEY=your_cohere_api_key_here
